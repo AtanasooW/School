@@ -1,26 +1,24 @@
-﻿using ASNClub.Data.Models.AddressModels;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using static ASNClub.Common.EntityValidationConstants.User;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-
-namespace ASNClub.Data.Models
+namespace School.Data.Models
 {
-    /// <summary>
-    /// This is custom User based on the Identity User class
-    /// Its modified i litle bit (Added address to the user)
-    /// </summary>
     public class ApplicationUser : IdentityUser<Guid>
     {
         public ApplicationUser()
         {
             this.Id = Guid.NewGuid();
         }
-        [StringLength(FirstNameMaxLength, MinimumLength = FirstNameMinLength)]
-
         public string? FirstName { get; set; }
-        [StringLength(SurNameMaxLength, MinimumLength = SurNameMinLength)]
         public string? Surname { get; set; }
-        public ICollection<UserAddress> UserAddresses { get; set; } = new HashSet<UserAddress>();
+        public string? MobileNumber { get; set; }
+        public Guid AddressId { get; set; }
+        public Address Address { get; set; }
+        public string? Status { get; set; }
     }
 }

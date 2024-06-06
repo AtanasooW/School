@@ -1,5 +1,5 @@
-﻿using ASNClub.ViewModels;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using School.Models;
 using System.Diagnostics;
 
 namespace ASNClub.Controllers

@@ -1,51 +1,21 @@
-using ASNClub.Data;
-using ASNClub.Data.Models;
-using ASNClub.Hubs;
-using ASNClub.Services.AddressServices;
-using ASNClub.Services.AddressServices.Contracts;
-using ASNClub.Services.CategoryServices;
-using ASNClub.Services.CategoryServices.Contracts;
-using ASNClub.Services.ColorServices;
-using ASNClub.Services.ColorServices.Contracts;
-using ASNClub.Services.CountyServices;
-using ASNClub.Services.CountyServices.Contracts;
-using ASNClub.Services.OrderServices;
-using ASNClub.Services.OrderServices.Contracts;
-using ASNClub.Services.ProductServices;
-using ASNClub.Services.ProductServices.Contracts;
-using ASNClub.Services.ProfileServices;
-using ASNClub.Services.ProfileServices.Contracts;
-using ASNClub.Services.ShoppingCartServices;
-using ASNClub.Services.ShoppingCartServices.Contracts;
-using ASNClub.Services.TypeServices;
-using ASNClub.Services.TypeServices.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using School.Data;
+using School.Data.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ASNClubDbContext>(options =>
+builder.Services.AddDbContext<SchoolContext>(options =>
         options.UseSqlServer(connectionString));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole<Guid>>()
-    .AddEntityFrameworkStores<ASNClubDbContext>();
-
-builder.Services.AddScoped<IProductService,ProductService>();
-builder.Services.AddScoped<IMaterialService,MaterialService>();
-builder.Services.AddScoped<IColorService,ColorService>();
-builder.Services.AddScoped<ITypeService,TypeService>();
-builder.Services.AddScoped<IProfileService,ProfileService>();
-builder.Services.AddScoped<IAddressService, AddressService>();
-builder.Services.AddScoped<ICountryService, CountryService>();
-builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
-builder.Services.AddScoped<IOrderService, OrderService>();
-
+    .AddEntityFrameworkStores<SchoolContext>();
 builder.Services.AddSignalR();
 
 builder.Services.AddControllersWithViews(options =>
@@ -66,25 +36,6 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-app.Use(async (context, next) =>
-{
-    await next();
-    if (context.Response.StatusCode == 500)
-    {
-        context.Request.Path = "/Error/InternalServerError";
-        await next();
-    }
-    if (context.Response.StatusCode == 404)
-    {
-        context.Request.Path = "/Error/NotFound";
-        await next();
-    }
-    if (context.Response.StatusCode == 400)
-    {
-        context.Request.Path = "/Error/BadRequest";
-        await next();
-    }
-});
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -109,5 +60,4 @@ app.UseEndpoints(endpoints =>
 });
 
 app.MapRazorPages();
-app.MapHub<CommentsHub>("/commentsHub");
 app.Run();
