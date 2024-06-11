@@ -23,6 +23,10 @@
   <ItemGroup>
     <ProjectReference Include="..\ASNClub.Data.Models\School.Data.Models.csproj" />
     <ProjectReference Include="..\ASNClub.Data\School.Data.csproj" />
+    <ProjectReference Include="..\Contracts\Contracts.csproj" />
+    <ProjectReference Include="..\Services\School.Services.csproj" />
+    <ProjectReference Include="..\School.Contracts\School.Contracts.csproj" />
+\    <ProjectReference Include="..\ViewModels\School.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
