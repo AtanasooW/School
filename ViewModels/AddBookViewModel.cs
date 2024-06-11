@@ -1,4 +1,4 @@
-﻿namespace ViewModels
+﻿namespace School.ViewModels
 {
     public class AddBookViewModel
     {

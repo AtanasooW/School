@@ -2,10 +2,10 @@
 using School.Data;
 using School.Data.Models;
 using School.ViewModels;
-using ViewModels;
+using Contracts;
 namespace Services
 {
-    public class BookService
+    public class BookService : IBookService
     {
         private readonly SchoolContext db;
 

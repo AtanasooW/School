@@ -7,8 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ASNClub.Data\School.Data.csproj" />
-    <ProjectReference Include="..\Contracts\Contracts.csproj" />
     <ProjectReference Include="..\ViewModels\School.ViewModels.csproj" />
   </ItemGroup>
 
